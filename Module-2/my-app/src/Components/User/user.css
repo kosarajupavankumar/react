@@ -1,0 +1,29 @@
+.user {
+  border: 1px solid #ccc;
+  font-family: "Times New Roman", Times, serif;
+  font-style: italic;
+  color: #333;
+
+  padding: 10px;
+  margin: 10px;
+  width: 250px; /* Decreased width */
+  height: 350px; /* Decreased height */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box; /* Ensure padding and border are included in the width and height */
+  background: linear-gradient(
+    135deg,
+    #f6d365 0%,
+    #fda085 100%
+  ); /* Added a beautiful gradient background */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Added a subtle shadow for better appearance */
+}
+
+.image_avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+}
