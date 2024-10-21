@@ -3,6 +3,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 
 function NavbarCompo(props) {
+  const { users, onLogOut } = props;
   return (
     <>
       <Navbar bg="dark" data-bs-theme="dark">
@@ -13,7 +14,8 @@ function NavbarCompo(props) {
             <Nav.Link href="#features">Features</Nav.Link>
             <Nav.Link href="#pricing">Pricing</Nav.Link>
           </Nav>
-          <button onClick={props.onLogOut}>LogOut</button>
+          <span>Total Users: {users.length}</span>
+          <button onClick={onLogOut}>LogOut</button>
         </Container>
       </Navbar>
       <br />

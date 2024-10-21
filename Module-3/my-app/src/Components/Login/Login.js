@@ -4,23 +4,61 @@ import Button from "react-bootstrap/Button";
 import "./Login.css";
 
 const Login = (props) => {
-  const handleSubmit = (e) => {
+  console.log(`rendering the login page`);
+
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const onFormSubmit = (e) => {
     e.preventDefault();
-    props.onLogin();
+    // console.log(`email: ${email}, password: ${password}`);
+    // check the validation of the email and password
+
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    if (!emailPattern.test(email)) {
+      alert("Invalid email");
+      return;
+    }
+
+    if (password.length < 8) {
+      alert("Password should be at least 8 characters long");
+      return;
+    }
+
+    // call the login function from the parent component
+    props.onLogin(email, password);
   };
 
   return (
     <div className="login">
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={onFormSubmit}>
         <Form.Group className="mb-3" controlId="formGroupEmail">
           <Form.Label>Email address</Form.Label>
-          <Form.Control type="email" placeholder="Enter email" />
+          <Form.Control
+            onChange={handleEmailChange}
+            value={email}
+            type="email"
+            placeholder="Enter email"
+          />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formGroupPassword">
           <Form.Label>Password</Form.Label>
-          <Form.Control type="password" placeholder="Password" />
+          <Form.Control
+            onChange={handlePasswordChange}
+            value={password}
+            type="password"
+            placeholder="Password"
+          />
         </Form.Group>
-        <Button variant="primary" type="submit" onClick={handleSubmit}>
+        <Button variant="primary" type="submit" onClick={onFormSubmit}>
           Submit
         </Button>
       </Form>
