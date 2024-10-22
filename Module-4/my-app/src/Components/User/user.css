@@ -1,0 +1,41 @@
+.user {
+  border: 1px solid #ccc;
+  font-family: "Times New Roman", Times, serif;
+  font-style: italic;
+  color: #333;
+  font-size: 14px; /* Reduce the text size */
+
+  padding: 10px;
+  margin: 10px;
+  width: 250px;
+  height: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden; /* Add this line to prevent overflow */
+}
+
+.image_avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-sizing: border-box;
+}
+
+.cross {
+  color: red;
+  font-size: 20px;
+  cursor: pointer;
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  background-color: white;
+  border-radius: 10%;
+  padding: 5px;
+}
