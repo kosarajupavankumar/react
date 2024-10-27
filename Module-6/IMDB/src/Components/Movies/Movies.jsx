@@ -1,24 +1,60 @@
-import React, { useEffect } from "react";
-import TypewriterSpinner from "../common/Spinner/TypewriterSpinner";
-import axios from "axios";
-import MovieCard from "../MovieCard/MovieCard";
+import React, { useState, useEffect } from 'react';
+import TypewriterSpinner from '../common/Spinner/TypewriterSpinner';
+import MovieCard from '../MovieCard/MovieCard';
+import Pagination from '../Pagination/Pagination';
 
 const Movies = () => {
-  const [movies, setMovies] = React.useState([]);
-  const [loading, setIsLoading] = React.useState(true);
+  const [movies, setMovies] = useState([]);
+  const [pageNumber, setPageNumber] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
+  const [watchList, setWatchList] = useState(() => {
+    const savedWatchList = localStorage.getItem('watchList');
+    return savedWatchList ? JSON.parse(savedWatchList) : [];
+  });
+
+  const addToWatchList = (movie) => {
+    if (!watchList.some((item) => item.id === movie.id)) {
+      const updatedWatchList = [...watchList, movie];
+      setWatchList(updatedWatchList);
+      localStorage.setItem('watchList', JSON.stringify(updatedWatchList));
+    }
+  };
+
+  const removeFromWatchList = (movie) => {
+    const updatedWatchList = watchList.filter((item) => item.id !== movie.id);
+    setWatchList(updatedWatchList);
+    localStorage.setItem('watchList', JSON.stringify(updatedWatchList));
+  };
+
+
 
   useEffect(() => {
-    axios
-      .get(
-        "https://api.themoviedb.org/3/trending/movie/day?api_key=YOUR_VALID_API_KEY&language=en-US&page=1"
-      )
-      .then((res) => {
-        setMovies(res.data.results);
+    const fetchMovies = async () => {
+      setIsLoading(true);
+      try {
+        const response = await fetch(`https://api.themoviedb.org/3/trending/movie/day?api_key=3aec63790d50f3b9fc2efb4c15a8cf99&language=en-US&page=${pageNumber}`);
+        const data = await response.json();
+        setMovies(data.results);
+      } catch (error) {
+        console.error('Error fetching movies:', error);
+      } finally {
         setIsLoading(false);
-      });
-  }, []);
+      }
+    };
 
-  if (loading) {
+    fetchMovies();
+  }, [pageNumber]);
+
+  const nextPageFn = () => {
+    setPageNumber((prevPageNumber) => prevPageNumber + 1);
+  };
+
+  const prevPageFn = () => {
+    if (pageNumber === 1) return;
+    setPageNumber((prevPageNumber) => prevPageNumber - 1);
+  };
+
+  if (isLoading) {
     return <TypewriterSpinner />;
   }
 
@@ -27,9 +63,10 @@ const Movies = () => {
       <h1>Trending Movies</h1>
       <div className="flex flex-wrap gap-8 justify-evenly">
         {movies.map((movie) => (
-          <MovieCard movie={movie} key={movie.id} />
+          <MovieCard movie={movie} key={movie.id} watchList={watchList} addToWatchList={addToWatchList} removeFromWatchList={removeFromWatchList} />
         ))}
       </div>
+      <Pagination pageNumber={pageNumber} nextPageFn={nextPageFn} prevPageFn={prevPageFn} />
     </div>
   );
 };

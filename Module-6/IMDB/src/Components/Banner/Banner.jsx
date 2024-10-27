@@ -3,7 +3,7 @@ import React from "react";
 
 const Banner = () => {
   const [bannerImage, setBannerImage] = React.useState(
-    "https://media.istockphoto.com/id/1324356458/vector/picture-icon-photo-frame-symbol-landscape-sign-photograph-gallery-logo-web-interface-and.jpg?s=612x612&w=0&k=20&c=ZmXO4mSgNDPzDRX-F8OKCfmMqqHpqMV6jiNi00Ye7rE="
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/991px-Placeholder_view_vector.svg.png"
   );
 
   const [title, setTitle] = React.useState("PlaceHolder Movie");
@@ -11,7 +11,7 @@ const Banner = () => {
   React.useEffect(() => {
     axios
       .get(
-        "https://api.themoviedb.org/3/trending/movie/day?api_key=YOUR_VALID_API_KEY&language=en-US&page=1"
+        "https://api.themoviedb.org/3/trending/movie/day?api_key=3aec63790d50f3b9fc2efb4c15a8cf99&language=en-US&page=1"
       )
       .then((res) => {
         const randomIndex = Math.floor(Math.random() * res.data.results.length);

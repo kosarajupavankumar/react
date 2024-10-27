@@ -4,6 +4,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import WatchList from "./pages/WatchList/WatchList";
 
+import '@fortawesome/fontawesome-free/css/all.min.css';
+
 function App() {
   return (
     <div>

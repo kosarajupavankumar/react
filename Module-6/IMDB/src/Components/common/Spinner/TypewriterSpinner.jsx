@@ -1,4 +1,4 @@
-import Typewriter from "typewriter-effect";
+import Typewriter from "react-typewriter-effect";
 
 const TypewriterSpinner = () => {
   return (
