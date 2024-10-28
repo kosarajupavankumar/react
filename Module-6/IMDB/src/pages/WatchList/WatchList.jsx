@@ -6,6 +6,27 @@ import genreids from "../../../utils/generes";
 const WatchList = () => {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [search, setSearch] = useState("");
+
+  const onSearchChange = (event) => {
+    const searchValue = event.target.value;
+    setSearch(searchValue);
+
+    if (searchValue === "") {
+      // Reset movies from local storage when search is cleared
+      const savedWatchList = localStorage.getItem("watchList");
+      if (savedWatchList) {
+        const watchList = JSON.parse(savedWatchList);
+        setMovies(watchList);
+      }
+    } else {
+      const updatedMovies = movies.filter((movie) => {
+        return movie.title.toLowerCase().includes(searchValue.toLowerCase());
+      });
+      setMovies(updatedMovies);
+    }
+  };
+
 
   // fetch movies from local storage and get the genere ids and map to the genre names and give me the list of genre
   const genereNames = movies.map((movie) => {
@@ -29,6 +50,14 @@ const WatchList = () => {
     fetchMovies();
   }, []);
 
+  const onMovieDelete = (id) => {
+    const updatedMovies = movies.filter((movie) => movie.id !== id);
+    setMovies(updatedMovies);
+    localStorage.setItem("watchList", JSON.stringify(updatedMovies));
+  }
+
+
+
   if (isLoading) {
     return <TypewriterSpinner />;
   }
@@ -46,7 +75,7 @@ const WatchList = () => {
 
       {/* search bar */}
       <div className="flex justify-center">
-          <input type="text" placeholder="Search for movies" className="border-2 border-gray-200 p-2 m-2 w-[50%] rounded-lg" />
+          <input type="text" value={search} onChange={onSearchChange} placeholder="Search for movies" className="border-2 border-gray-200 p-2 m-2 w-[50%] rounded-lg" />
       </div>
 
       {/* Create the table  */}
@@ -72,6 +101,7 @@ const WatchList = () => {
                   <td className="border px-4 py-2">{movie.vote_average}</td>
                   <td className="border px-4 py-2">{movie.popularity}</td>
                   <td className="border px-4 py-2">{movie.genre_ids && movie.genre_ids.length > 0 ? genreids[movie.genre_ids[0]] : "Unknown"}</td>
+                  <td onClick={()=>onMovieDelete(movie.id)} className="text-red-500">Delete</td>
                 </tr>
               ))
             }
