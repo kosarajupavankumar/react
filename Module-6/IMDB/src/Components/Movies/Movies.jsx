@@ -2,23 +2,28 @@ import React, { useState, useEffect } from 'react';
 import TypewriterSpinner from '../common/Spinner/TypewriterSpinner';
 import MovieCard from '../MovieCard/MovieCard';
 import Pagination from '../Pagination/Pagination';
+import WatchListContext from '../../Context/WatchListContext';
 
 const Movies = () => {
   const [movies, setMovies] = useState([]);
   const [pageNumber, setPageNumber] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
-  const [watchList, setWatchList] = useState(() => {
-    const savedWatchList = localStorage.getItem('watchList');
-    return savedWatchList ? JSON.parse(savedWatchList) : [];
-  });
+  // const [watchList, setWatchList] = useState(() => {
+  //   const savedWatchList = localStorage.getItem('watchList');
+  //   return savedWatchList ? JSON.parse(savedWatchList) : [];
+  // });
 
-  const addToWatchList = (movie) => {
-    if (!watchList.some((item) => item.id === movie.id)) {
-      const updatedWatchList = [...watchList, movie];
-      setWatchList(updatedWatchList);
-      localStorage.setItem('watchList', JSON.stringify(updatedWatchList));
-    }
-  };
+  // use it from the context
+  const { watchList, setWatchList, addToWatchList } = React.useContext(WatchListContext);
+  console.log('watchList', JSON.stringify(watchList));
+
+  // const addToWatchList = (movie) => {
+  //   if (!watchList.some((item) => item.id === movie.id)) {
+  //     const updatedWatchList = [...watchList, movie];
+  //     setWatchList(updatedWatchList);
+  //     localStorage.setItem('watchList', JSON.stringify(updatedWatchList));
+  //   }
+  // };
 
   const removeFromWatchList = (movie) => {
     const updatedWatchList = watchList.filter((item) => item.id !== movie.id);

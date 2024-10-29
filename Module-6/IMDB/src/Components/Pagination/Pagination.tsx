@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import WatchListContext from '../../Context/WatchListContext';
 
 const Pagination = ({pageNumber, nextPageFn, prevPageFn}) => {
     
