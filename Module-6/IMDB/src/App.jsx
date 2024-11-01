@@ -12,6 +12,7 @@ import Counter from "./pages/Counter/Counter";
 import {Provider} from "react-redux";
 import Store from './redux/store/store';
 import Todo from "./pages/Todo/Todo";
+import User from "./pages/Users/user";
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
       <WatchListProvider>
         <Navbar />
         <Routes>
+          <Route path="/user" element={<User />} />
           <Route path="/todo" element={<Todo />} />
           <Route path="/counter" element={<Counter />} />
           <Route path="/" element={<Home />} />
