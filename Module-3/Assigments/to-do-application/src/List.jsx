@@ -11,8 +11,7 @@ export default function List(props) {
               onClick={() => {
                 handleDelete(idx);
               }}
-              key={idx}
-            >
+              key={idx}>
               {" "}
               {task}
             </li>

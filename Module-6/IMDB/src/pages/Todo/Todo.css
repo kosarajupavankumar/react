@@ -1,0 +1,56 @@
+.container {
+    display: flex;
+    align-items: center;
+}
+
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.input {
+    width: calc(100% - 150px); /* Adjust width to fit with button */
+    padding: 12px 20px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+
+/* ToDo Component Styles */
+.ToDoComponent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #ccc;
+    background-color: #f9f9f9;
+    transition: background-color 0.3s ease;
+}
+
+.ToDoComponent:hover {
+    background-color: #e9e9e9;
+}
+
+/* Unordered List Styles */
+.unorderList {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* List Item Styles */
+.list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

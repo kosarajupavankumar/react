@@ -5,17 +5,15 @@ import InputBox from "./InputBox";
 
 function Todo() {
   const [tasksArr, setTasks] = useState([]);
-
-  // add the task for the function
-  const addTask = (task) => {
-    if (task.trim()) {
-      setTasks([...tasksArr, task]);
+  const addTask = (inputValue) => {
+    if(inputValue){
+      setTasks(...tasksArr, inputValue);
     }
   };
 
   const handleDelete = (idx) => {
     // Complete the function
-    setTasks(tasksArr.filter((task, index) => index !== idx));
+    setTasks(tasksArr.filter((task) => task != idx));
   };
 
   return (
