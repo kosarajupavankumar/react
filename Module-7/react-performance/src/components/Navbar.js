@@ -1,9 +1,7 @@
 import { Link } from 'react-router-dom';
 
-const Navbar = ({loadAboutPage, loadContactPage}) => {
-
-
-
+const Navbar = () => {
+    
     return (
         <nav>
             <ul>
@@ -11,10 +9,10 @@ const Navbar = ({loadAboutPage, loadContactPage}) => {
                     <Link to="/"> Home</Link>
                 </li>
                 <li>
-                    <Link to="/about" onClick={loadAboutPage}> About</Link>
+                    <Link to="/about" > About</Link>
                 </li>
                 <li>
-                    <Link to="/contact" onClick={loadContactPage}> Contact</Link>
+                    <Link to="/contact" > Contact</Link>
                 </li>
             </ul>
         </nav>
